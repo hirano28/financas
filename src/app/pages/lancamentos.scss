@@ -1,5 +1,23 @@
 .form-grid {
 	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.table-container {
+	overflow: auto;
+}
+
+table {
+	width: 100%;
+}
+
+td.expense {
+	color: var(--mat-sys-error);
+}
+.form-grid {
+	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 	gap: 16px;
 	align-items: end;
