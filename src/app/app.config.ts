@@ -1,4 +1,7 @@
 import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import { DateAdapter } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { PtBrDateAdapter, PT_BR_DATE_FORMATS } from './shared/ptbr-date-adapter';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -14,6 +17,9 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes), provideClientHydration(withEventReplay()),
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: DateAdapter, useClass: PtBrDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PT_BR_DATE_FORMATS },
   ]
 };
