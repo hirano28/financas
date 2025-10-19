@@ -1,5 +1,38 @@
 # Financas
 
+App Angular para controle de finanças pessoais (Dashboard + Lançamentos) com persistência local.
+
+## Rodar em desenvolvimento
+
+```powershell
+cd D:\Edson\projetos\financas
+npm start
+```
+
+Acesse http://localhost:4200/
+
+## Build de produção
+
+```powershell
+npm run build
+```
+
+Saída em `dist/financas`.
+
+## Estrutura
+
+- `src/app/pages/dashboard*`: Resumo (Receitas, Despesas, Saldo) e últimos lançamentos
+- `src/app/pages/lancamentos*`: Formulário para novos lançamentos e lista
+- `src/app/core/services/transaction.service.ts`: CRUD em memória com localStorage (SSR-safe)
+
+## Próximos passos
+
+- Melhorar UI com Angular Material (toolbar, cards, formulário, tabela)
+- Categorias e Contas; filtros por período
+- Relatórios com gráficos (por categoria, evolução mensal)
+- Importação/Exportação CSV
+
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
 
 ## Development server
