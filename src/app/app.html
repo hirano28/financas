@@ -1,5 +1,11 @@
-<nav style="padding: 1rem; display: flex; gap: 1rem; border-bottom: 1px solid #eee">
-  <a routerLink="/">Dashboard</a>
-  <a routerLink="/lancamentos">Lançamentos</a>
-</nav>
-<router-outlet />
+<mat-toolbar color="primary">
+  <span style="font-weight:600">Finanças</span>
+  <span class="spacer"></span>
+  <a mat-button routerLink="/">Dashboard</a>
+  <a mat-button routerLink="/lancamentos">Lançamentos</a>
+</mat-toolbar>
+
+<main class="container">
+  <router-outlet />
+  <footer class="footer">Feito por você • {{ title() }}</footer>
+</main>

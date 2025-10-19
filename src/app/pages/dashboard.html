@@ -2,33 +2,33 @@
 	<header class="summary">
 		<h2>Resumo</h2>
 		<div class="cards">
-			<div class="card income">
-				<span>Receitas</span>
-				<strong>{{ income() | currency:'BRL':'symbol':'1.2-2':'pt' }}</strong>
-			</div>
-			<div class="card expense">
-				<span>Despesas</span>
-				<strong>{{ expense() | currency:'BRL':'symbol':'1.2-2':'pt' }}</strong>
-			</div>
-			<div class="card balance">
-				<span>Saldo</span>
-				<strong>{{ balance() | currency:'BRL':'symbol':'1.2-2':'pt' }}</strong>
-			</div>
+			<mat-card appearance="outlined" class="income">
+				<mat-card-subtitle>Receitas</mat-card-subtitle>
+				<mat-card-title>{{ income() | currency:'BRL' }}</mat-card-title>
+			</mat-card>
+			<mat-card appearance="outlined" class="expense">
+				<mat-card-subtitle>Despesas</mat-card-subtitle>
+				<mat-card-title>{{ expense() | currency:'BRL' }}</mat-card-title>
+			</mat-card>
+			<mat-card appearance="outlined" class="balance">
+				<mat-card-subtitle>Saldo</mat-card-subtitle>
+				<mat-card-title>{{ balance() | currency:'BRL' }}</mat-card-title>
+			</mat-card>
 		</div>
-		<a routerLink="/lancamentos" class="add-btn">+ Adicionar lançamento</a>
+		<a mat-raised-button color="primary" routerLink="/lancamentos">+ Adicionar lançamento</a>
 	</header>
 
 	<section class="recent" *ngIf="txs().length; else empty">
 		<h3>Últimos lançamentos</h3>
-		<ul>
-			<li *ngFor="let t of txs() | slice:0:10">
-				<span class="date">{{ t.date | date:'dd/MM/yyyy' }}</span>
-				<span class="desc">{{ t.description }}</span>
-				<span class="amount" [class.expense]="t.type==='expense'">
-					{{ (t.type==='expense' ? -t.amount : t.amount) | currency:'BRL':'symbol':'1.2-2':'pt' }}
-				</span>
-			</li>
-		</ul>
+			<mat-list>
+				<mat-list-item *ngFor="let t of txs() | slice:0:10">
+					<div matListItemTitle>{{ t.description }}</div>
+					<div matListItemLine>{{ t.date | date:'dd/MM/yyyy' }}</div>
+					<div matListItemMeta [ngClass]="{ expense: t.type === 'expense'}">
+						{{ (t.type==='expense' ? -t.amount : t.amount) | currency:'BRL' }}
+					</div>
+				</mat-list-item>
+			</mat-list>
 	</section>
 
 	<ng-template #empty>

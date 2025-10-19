@@ -1,0 +1,10 @@
+.form-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+	align-items: end;
+}
+
+mat-list-item {
+	border-bottom: 1px solid rgba(0,0,0,0.06);
+}

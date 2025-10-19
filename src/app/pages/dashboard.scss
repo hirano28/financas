@@ -1,0 +1,20 @@
+.summary {
+	display: grid;
+	gap: 16px;
+}
+
+.cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+}
+
+.income mat-card-title { color: var(--mat-sys-primary); }
+.expense mat-card-title { color: var(--mat-sys-error); }
+.balance mat-card-title { color: var(--mat-sys-secondary); }
+
+.recent mat-list-item {
+	border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.expense { color: var(--mat-sys-error); }
