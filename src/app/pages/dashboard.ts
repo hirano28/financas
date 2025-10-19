@@ -10,7 +10,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
+import { PtBrDateAdapter, PT_BR_DATE_FORMATS } from '../shared/ptbr-date-adapter';
 import { PLATFORM_ID } from '@angular/core';
 
 @Component({
@@ -19,7 +20,12 @@ import { PLATFORM_ID } from '@angular/core';
   imports: [NgForOf, NgIf, NgClass, DatePipe, CurrencyPipe, SlicePipe, RouterLink, MatCardModule, MatListModule, MatButtonModule, MatButtonToggleModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, DashboardChartsComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
-  providers: [provideNativeDateAdapter()]
+  providers: [
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: DateAdapter, useClass: PtBrDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PT_BR_DATE_FORMATS },
+  ]
 })
 export class DashboardComponent {
   private txService = inject(TransactionService);
