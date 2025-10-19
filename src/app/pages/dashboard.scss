@@ -18,3 +18,17 @@
 }
 
 .expense { color: var(--mat-sys-error); }
+
+.charts {
+	margin-top: 16px;
+}
+
+.chart-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 16px;
+}
+
+.chart-box {
+	height: 260px;
+}

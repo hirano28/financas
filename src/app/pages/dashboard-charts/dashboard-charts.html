@@ -1,0 +1,16 @@
+<section class="charts" *ngIf="isBrowser && txs.length">
+  <div class="chart-grid">
+    <mat-card appearance="outlined">
+      <mat-card-subtitle>Evolução (últimos 6 meses)</mat-card-subtitle>
+      <div class="chart-box">
+        <canvas baseChart [type]="'line'" [data]="lineData" [options]="lineOptions"></canvas>
+      </div>
+    </mat-card>
+    <mat-card appearance="outlined">
+      <mat-card-subtitle>Distribuição por tipo</mat-card-subtitle>
+      <div class="chart-box">
+        <canvas baseChart [type]="'doughnut'" [data]="donutData" [options]="donutOptions"></canvas>
+      </div>
+    </mat-card>
+  </div>
+</section>

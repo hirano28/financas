@@ -34,4 +34,6 @@
 	<ng-template #empty>
 		<p>Nenhum lançamento ainda. Comece adicionando o primeiro.</p>
 	</ng-template>
+
+	<app-dashboard-charts *ngIf="isBrowser() && txs().length" [txs]="txs()" />
 </section>
