@@ -3,6 +3,17 @@
 	gap: 16px;
 }
 
+.filters {
+	display: grid;
+	gap: 12px;
+}
+
+.custom-range {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 12px;
+}
+
 .cards {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

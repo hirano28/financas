@@ -1,6 +1,27 @@
 <section class="dashboard">
 	<header class="summary">
 		<h2>Resumo</h2>
+		<div class="filters">
+			<mat-button-toggle-group [value]="periodMode()" (change)="setPeriod($event.value)" name="period" aria-label="Período">
+				<mat-button-toggle value="30d">30 dias</mat-button-toggle>
+				<mat-button-toggle value="90d">90 dias</mat-button-toggle>
+				<mat-button-toggle value="ytd">Ano atual</mat-button-toggle>
+				<mat-button-toggle value="12m">12 meses</mat-button-toggle>
+				<mat-button-toggle value="custom">Personalizado</mat-button-toggle>
+			</mat-button-toggle-group>
+			<div class="custom-range" *ngIf="periodMode() === 'custom'">
+				<mat-form-field appearance="outline">
+					<mat-label>Início</mat-label>
+					<input matInput [matDatepicker]="dpStart" (dateChange)="setCustomRangeStart($event.value)">
+					<mat-datepicker #dpStart></mat-datepicker>
+				</mat-form-field>
+				<mat-form-field appearance="outline">
+					<mat-label>Fim</mat-label>
+					<input matInput [matDatepicker]="dpEnd" (dateChange)="setCustomRangeEnd($event.value)">
+					<mat-datepicker #dpEnd></mat-datepicker>
+				</mat-form-field>
+			</div>
+		</div>
 		<div class="cards">
 			<mat-card appearance="outlined" class="income">
 				<mat-card-subtitle>Receitas</mat-card-subtitle>
@@ -18,10 +39,10 @@
 		<a mat-raised-button color="primary" routerLink="/lancamentos">+ Adicionar lançamento</a>
 	</header>
 
-	<section class="recent" *ngIf="txs().length; else empty">
+	<section class="recent" *ngIf="filteredTxs().length; else empty">
 		<h3>Últimos lançamentos</h3>
 			<mat-list>
-				<mat-list-item *ngFor="let t of txs() | slice:0:10">
+				<mat-list-item *ngFor="let t of filteredTxs() | slice:0:10">
 					<div matListItemTitle>{{ t.description }}</div>
 					<div matListItemLine>{{ t.date | date:'dd/MM/yyyy' }}</div>
 					<div matListItemMeta [ngClass]="{ expense: t.type === 'expense'}">
@@ -35,5 +56,5 @@
 		<p>Nenhum lançamento ainda. Comece adicionando o primeiro.</p>
 	</ng-template>
 
-	<app-dashboard-charts *ngIf="isBrowser() && txs().length" [txs]="txs()" />
+	<app-dashboard-charts *ngIf="isBrowser() && filteredTxs().length" [txs]="filteredTxs()" />
 </section>
