@@ -5,19 +5,19 @@
 			<mat-button-toggle-group [value]="periodMode()" (change)="setPeriod($event.value)" name="period" aria-label="Período">
 				<mat-button-toggle value="30d">30 dias</mat-button-toggle>
 				<mat-button-toggle value="90d">90 dias</mat-button-toggle>
-				<mat-button-toggle value="ytd">Ano atual</mat-button-toggle>
 				<mat-button-toggle value="12m">12 meses</mat-button-toggle>
+				<mat-button-toggle value="ytd">Ano atual</mat-button-toggle>
 				<mat-button-toggle value="custom">Personalizado</mat-button-toggle>
 			</mat-button-toggle-group>
 			<div class="custom-range" *ngIf="periodMode() === 'custom'">
 				<mat-form-field appearance="outline">
 					<mat-label>Início</mat-label>
-					<input matInput [matDatepicker]="dpStart" (dateChange)="setCustomRangeStart($event.value)">
+					<input matInput [matDatepicker]="dpStart" (dateChange)="setCustomRangeStart($event.value)" (input)="onCustomStartInput($event)">
 					<mat-datepicker #dpStart></mat-datepicker>
 				</mat-form-field>
 				<mat-form-field appearance="outline">
 					<mat-label>Fim</mat-label>
-					<input matInput [matDatepicker]="dpEnd" (dateChange)="setCustomRangeEnd($event.value)">
+					<input matInput [matDatepicker]="dpEnd" (dateChange)="setCustomRangeEnd($event.value)" (input)="onCustomEndInput($event)">
 					<mat-datepicker #dpEnd></mat-datepicker>
 				</mat-form-field>
 			</div>

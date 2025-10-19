@@ -100,4 +100,44 @@ export class DashboardComponent {
     const current = this.customRange();
     this.setCustomRange(current.start ? new Date(current.start) : null, end);
   }
+
+  // Simple input masks for custom date fields (dd/MM/yyyy)
+  onCustomStartInput(ev: Event) {
+    const input = ev.target as HTMLInputElement;
+    const masked = this.maskDate(input.value);
+    if (masked !== input.value) input.value = masked;
+    const date = this.parseMaskedDate(masked);
+    if (date) this.setCustomRangeStart(date);
+  }
+
+  onCustomEndInput(ev: Event) {
+    const input = ev.target as HTMLInputElement;
+    const masked = this.maskDate(input.value);
+    if (masked !== input.value) input.value = masked;
+    const date = this.parseMaskedDate(masked);
+    if (date) this.setCustomRangeEnd(date);
+  }
+
+  private maskDate(v: string): string {
+    const digits = v.replace(/\D/g, '').slice(0, 8);
+    const dd = digits.slice(0, 2);
+    const mm = digits.slice(2, 4);
+    const yyyy = digits.slice(4, 8);
+    let out = dd;
+    if (mm) out += '/' + mm;
+    if (yyyy) out += '/' + yyyy;
+    return out;
+  }
+
+  private parseMaskedDate(v: string): Date | null {
+    const m = v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (!m) return null;
+    const d = parseInt(m[1], 10);
+    const mth = parseInt(m[2], 10) - 1;
+    const y = parseInt(m[3], 10);
+    const dt = new Date(y, mth, d);
+    // validate calendar correctness (no auto-rollover)
+    if (dt.getFullYear() !== y || dt.getMonth() !== mth || dt.getDate() !== d) return null;
+    return dt;
+  }
 }
