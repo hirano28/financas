@@ -1,0 +1,33 @@
+<section class="lancamentos">
+	<h2>Novo lançamento</h2>
+	<form (ngSubmit)="add()" #f="ngForm">
+		<label>
+			Data
+			<input type="date" name="date" [(ngModel)]="model.date" required />
+		</label>
+		<label>
+			Descrição
+			<input type="text" name="description" [(ngModel)]="model.description" required />
+		</label>
+		<label>
+			Valor
+			<input type="number" name="amount" [(ngModel)]="model.amount" step="0.01" required />
+		</label>
+		<label>
+			Tipo
+			<select name="type" [(ngModel)]="model.type">
+				<option value="income">Receita</option>
+				<option value="expense">Despesa</option>
+			</select>
+		</label>
+		<button type="submit" [disabled]="f.invalid">Adicionar</button>
+	</form>
+
+	<h3>Todos os lançamentos</h3>
+	<ul>
+		<li *ngFor="let t of txs()">
+			<span>{{ t.date }} - {{ t.description }} - {{ t.type }} - {{ t.amount }}</span>
+			<button type="button" (click)="remove(t.id)">Excluir</button>
+		</li>
+	</ul>
+</section>
